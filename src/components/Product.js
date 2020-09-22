@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ProductConsumer } from "../context";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+
 class Product extends Component {
     render() {
         const { id, title, img, price, inCart } = this.props.product;
@@ -14,6 +17,16 @@ class Product extends Component {
                         <Link to="/details">
                             <img src={img} alt="product image" className="card-img-top" />
                         </Link>
+                        <button
+                            className="cart-btn"
+                            disabled={inCart ? true : false}
+                            onClick={() => { console.log("added to the cart"); }}
+                        >
+                            {inCart ?
+                                (<p className="text-capitalize mb-0" disabled>{" "}in cart</p>) :
+                                (<FontAwesomeIcon icon={faCartPlus} />)
+                            }
+                        </button>
                     </div>
                 </div>
             </ProductWrapper >
