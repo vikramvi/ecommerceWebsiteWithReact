@@ -6,6 +6,8 @@ import { ProductConsumer } from "../context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
+import PropTypes from "prop-types";
+
 class Product extends Component {
     render() {
         const { id, title, img, price, inCart } = this.props.product;
@@ -40,6 +42,19 @@ class Product extends Component {
             </ProductWrapper >
         )
     }
+}
+
+//class name
+Product.propTypes = {
+    //prop name
+    product: PropTypes.shape({
+        id: PropTypes.number,
+        title: PropTypes.string,
+        img: PropTypes.string,
+        price: PropTypes.number,
+        //note it's not boolean but bool
+        inCart: PropTypes.bool
+    }).isRequired
 }
 
 const ProductWrapper = styled.div`
