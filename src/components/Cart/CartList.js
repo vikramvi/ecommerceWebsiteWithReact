@@ -1,11 +1,18 @@
 import React from 'react';
+import Cart from './Cart';
 import CartItem from './CartItem';
 
-function CartList() {
+function CartList({ value }) {
+    const { cart } = value;
     return (
-        <div>
-            Hello from cart list
-            <CartItem />
+        <div className="container-fluid">
+            { cart.map(item =>
+                <CartItem
+                    key={item.id}
+                    item={item}
+                    value={value}
+                />
+            )}
         </div>
     );
 }
