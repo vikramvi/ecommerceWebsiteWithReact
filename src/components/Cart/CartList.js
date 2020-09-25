@@ -1,5 +1,4 @@
 import React from 'react';
-import Cart from './Cart';
 import CartItem from './CartItem';
 
 function CartList({ value }) {
