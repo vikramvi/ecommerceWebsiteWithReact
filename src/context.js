@@ -107,7 +107,29 @@ class ProductProvider extends Component {
     }
 
     decrement = (id) => {
-        console.log('decrement method');
+        //create copy of cart
+        let tempCart = [...this.state.cart];
+
+        //get product against which increment operation is performed
+        const selectedProduct = tempCart.find((item) => item.id === id);
+
+        const index = tempCart.indexOf(selectedProduct);
+        const product = tempCart[index];
+
+        product.count = product.count - 1;
+
+        if (product.count === 0) {
+            this.removeItem(id);
+        } else {
+            product.total = product.count * product.price;
+
+            //update cart & total
+            this.setState(
+                () => { return { cart: tempCart } },
+                () => { return this.addTotals(); }
+            );
+        }
+
     }
 
     removeItem = (id) => {
