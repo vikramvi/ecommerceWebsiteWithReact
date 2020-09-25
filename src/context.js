@@ -96,7 +96,36 @@ class ProductProvider extends Component {
     }
 
     removeItem = (id) => {
-        console.log('removeItem method');
+
+        //create temp data copy to work upon
+        //Do NOT work on original data
+        let tempProducts = [...this.state.products];
+        let tempCart = [...this.state.cart];
+
+        //update temp array excluding product which needs to be removed
+        tempCart = tempCart.filter(item => item.id !== id);
+
+        //get product index to be removed 
+        const index = tempProducts.indexOf(this.getItem(id));
+
+        //get product from array
+        let removedItem = tempProducts[index];
+        //update product properties
+        removedItem.inCart = false;
+        removedItem.count = 0;
+        removedItem.total = 0;
+
+        //update values global cart, products
+        this.setState(
+            () => {
+                return {
+                    cart: [...tempCart],
+                    products: [...tempProducts]
+                }
+            }, () => {
+                this.addTotals();
+            }
+        );
     }
 
     clearCart = () => {
